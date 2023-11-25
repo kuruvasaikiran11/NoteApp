@@ -25,7 +25,9 @@ To get started with this project, follow these steps:
    git clone https://github.com/your-username/react-todo-app.git
    cd react-todo-app
 
-The app will be available at http://localhost:3000.
+## Live Preview
+The app will be available at below Live Server.
+https://kuruvasaikiran11.github.io/NoteApp/
 
 ## Usage
 Add a new note by typing in the input field and pressing "Enter."
