@@ -18,13 +18,14 @@ const style = {
   p: 4,
 };
 
-const NoteList = (props) => {
+const PendingNotes = (props) => {
   let [checkedItems, setCheckedItems] = useState([]);
   let [isAllSelected, setIsAllSelected] = useState(false);
   // let [isModalOpen, setisModalOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [modalId, setModalId] = useState();
   const [editedNote, setEditedNote] = useState("");
+
   const handleOpen = (id) => {
     setOpen(true);
     setModalId(id);
@@ -103,13 +104,13 @@ const NoteList = (props) => {
       updatedList[modalId].note = editedNote;
       props.setNoteList(updatedList);
       localStorage.setItem("noteList", JSON.stringify(updatedList));
-      setOpen(false)
-      setEditedNote("")
+      setOpen(false);
+      setEditedNote("");
     }
   };
   const handleCancelClick = () => {
-    setOpen(false)
-    setEditedNote("")
+    setOpen(false);
+    setEditedNote("");
   };
 
   const handleSaveClick = () => {
@@ -125,7 +126,7 @@ const NoteList = (props) => {
     });
     localStorage.setItem("noteList", JSON.stringify(updatedList));
     setOpen(false);
-    setEditedNote("")
+    setEditedNote("");
   };
 
   if (!Array.isArray(props.noteList)) {
@@ -169,94 +170,118 @@ const NoteList = (props) => {
             ""
           )}
         </div>
-        {props.noteList.length > 0 ? Object.keys(props.noteList).map((key) => {
-          const item = props.noteList[key]; 
-          const index = parseInt(key)
-          return (
-            <>
-              <li key={index} className={styles.menuItem}>
-                <input
-                  type="checkbox"
-                  id={item.id}
-                  onChange={() => handleToggleCheckBox(index)}
-                  checked={checkedItems.includes(index) || isAllSelected}
-                  className={styles.noteLabel}
-                ></input>
-                {/* <CheckBox onClick={()=>handleToggleCheckBox(index)} checked={checkedItems.includes(index)}/> */}
-                <label htmlFor={index} className={styles.noteLabel}>
-                  <b>{item.note}</b>
-                </label>
-                <div>
-                  <EditIcon
-                    color="primary"
-                    onClick={() => handleOpen(index)}
-                  ></EditIcon>
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style} className={styles.modalBox}>
+        {props.noteList.length > 0
+          ? Object.keys(props.noteList).map((key) => {
+              const item = props.noteList[key];
+              const index = parseInt(key);
+              if (!item.isCompleted) {
+                return (
+                  <>
+                    <li key={index} className={styles.menuItem}>
+                      {/* if(!(note.isCompleted){ */}
                       <input
-                        type="text"
-                        className={styles.editInput}
-                        value={editedNote}
-                        onChange={handleEditChange}
-                        onKeyUp={handleEditEnter}
+                        type="checkbox"
+                        id={index}
+                        onChange={() => handleToggleCheckBox(index)}
+                        checked={checkedItems.includes(index) || isAllSelected}
+                        className={styles.noteLabel}
                       ></input>
+                      <label htmlFor={index} className={styles.noteLabel}>
+                        <b>{item.note}</b>
+                      </label>
                       <div>
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          size="small"
-                          className={styles.modalBtn}
-                          onClick={()=>{props.noteList[modalId].isCompleted = false; localStorage.setItem("noteList", JSON.stringify(props.noteList)); setOpen(false)}}
-                        >
-                          Pending
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="success"
-                          size="small"
-                          className={styles.modalBtn}
-                          onClick={()=>{props.noteList[modalId].isCompleted = true; localStorage.setItem("noteList", JSON.stringify(props.noteList)); setOpen(false)}}
-                        >
-                          Completed
-                        </Button>
-                        <Button
-                          variant="contained"
+                        <EditIcon
                           color="primary"
-                          size="small"
-                          className={styles.modalBtn}
-                          onClick={handleSaveClick}
+                          onClick={() => handleOpen(index)}
+                        ></EditIcon>
+                        <Modal
+                          open={open}
+                          onClose={handleClose}
+                          aria-labelledby="modal-modal-title"
+                          aria-describedby="modal-modal-description"
                         >
-                          Save
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          size="small"
-                          className={styles.modalBtn}
-                          onClick={handleCancelClick}
-                        >
-                          Cancel
-                        </Button>
+                          <Box sx={style} className={styles.modalBox}>
+                            <input
+                              type="text"
+                              className={styles.editInput}
+                              value={editedNote}
+                              onChange={handleEditChange}
+                              onKeyUp={handleEditEnter}
+                            ></input>
+                            <div>
+                              <Button
+                                variant="outlined"
+                                color="secondary"
+                                size="small"
+                                className={styles.modalBtn}
+                                //   onClick={()=>{const newPendingNotes = [...props.noteList]; newPendingNotes[modalId].isCompleted = false;
+                                //     props.setCompletedNotes(newPendingNotes);}}
+                                onClick={() => {
+                                  props.noteList[modalId].isCompleted = false;
+                                  localStorage.setItem(
+                                    "noteList",
+                                    JSON.stringify(props.noteList)
+                                  );
+                                  setOpen(false);
+                                }}
+                              >
+                                Pending
+                              </Button>
+                              <Button
+                                variant="contained"
+                                color="success"
+                                size="small"
+                                className={styles.modalBtn}
+                                //   onClick={()=>{const newPendingNotes = [...props.noteList]; newPendingNotes[modalId].isCompleted = true;
+                                //     props.setCompletedNotes(newPendingNotes);}}
+                                onClick={() => {
+                                  props.noteList[modalId].isCompleted = true;
+                                  localStorage.setItem(
+                                    "noteList",
+                                    JSON.stringify(props.noteList)
+                                  );
+                                  setOpen(false);
+                                }}
+                              >
+                                Completed
+                              </Button>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                size="small"
+                                className={styles.modalBtn}
+                                onClick={handleSaveClick}
+                              >
+                                Save
+                              </Button>
+                              <Button
+                                variant="outlined"
+                                color="error"
+                                size="small"
+                                className={styles.modalBtn}
+                                onClick={handleCancelClick}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </Box>
+                        </Modal>
+                        <DeleteIcon
+                          color="action"
+                          onClick={() => handleDeleteClick(index)}
+                        />
                       </div>
-                    </Box>
-                  </Modal>
-                  <DeleteIcon
-                    color="action"
-                    onClick={() => handleDeleteClick(index)}
-                  />
-                </div>
-              </li>
-            </>
-          );
-        }) : ""}
+                    </li>
+                  </>
+                );
+              } else {
+                return null;
+              }
+            })
+          : ""}
       </div>
     </>
   );
 };
 
-export default NoteList;
+export default PendingNotes;

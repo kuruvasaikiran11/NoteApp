@@ -6,8 +6,8 @@ import CompletedNotes from './CompletedNotes';
 
 function NoteApp(props) {
   const [activeTab, setActiveTab] = useState(0);
-  const pendingNotes = props.noteList.filter((note) => !note.isCompleted);
-  const completedNotes = props.noteList.filter((note) => note.isCompleted);
+  // const pendingNotes = props.noteList.filter((note) => !note.isCompleted);
+  // const completedNotes = props.noteList.filter((note) => note.isCompleted);
   // console.log("noteList : ",props.noteList)
   // console.log("Pending : ", pendingNotes)
   // console.log("Completed : ", completedNotes)
@@ -35,11 +35,11 @@ function NoteApp(props) {
     },
     {
       title: 'Pending Tasks',
-      content: <PendingNotes noteList={pendingNotes} setNoteList={props.setNoteList}/>
+      content: <PendingNotes noteList={props.noteList} setNoteList={props.setNoteList}/>
     },
     {
       title: 'Completed Tasks',
-      content: <CompletedNotes noteList={completedNotes} setNoteList={props.setNoteList}/>
+      content: <CompletedNotes noteList={props.noteList} setNoteList={props.setNoteList}/>
     }
   ];
 
