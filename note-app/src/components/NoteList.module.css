@@ -1,0 +1,85 @@
+.heading{
+    background-color: rgb(228, 153, 153);
+    color: rgb(18, 18, 28);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.heading{
+    padding: 0px 20px;
+}
+
+.headingText{
+    margin: 10px;
+    font-weight: bolder;
+}
+
+.menu{
+    width: 100%;
+}
+
+.menu>.actionBtn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom : 20px;
+    position: relative;
+}
+
+.selectAllInput{
+    cursor: pointer;
+}
+
+.actionBtn > button{
+    margin-left: auto;
+}
+.menuItem{
+    list-style: none;
+    background-color: wheat;
+    color: black;
+    padding: 20px 10px;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center ;
+    /* cursor: pointer; */
+}
+
+.noteLabel{
+    cursor: pointer;
+}
+
+.menuItem > b{
+    margin-left: 2%;
+}
+
+.menuItem>div{
+    margin-left: auto;
+}
+
+.menuItem > div > svg{
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+
+.editInput{
+    width: 100%;
+    height: 2rem;
+}
+
+.modalBtn{
+    margin: 10px;
+    margin-left: 0;
+}
+
+.modalBox{
+    width: 80%!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
