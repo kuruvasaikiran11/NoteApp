@@ -201,6 +201,7 @@ const PendingNotes = (props) => {
                           aria-describedby="modal-modal-description"
                         >
                           <Box sx={style} className={styles.modalBox}>
+                            <h2>Edit your note here</h2>
                             <input
                               type="text"
                               className={styles.editInput}

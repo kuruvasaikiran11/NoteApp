@@ -175,6 +175,7 @@ const NoteList = (props) => {
           return (
             <>
               <li key={index} className={styles.menuItem}>
+                
                 <input
                   type="checkbox"
                   id={item.id}
@@ -198,6 +199,7 @@ const NoteList = (props) => {
                     aria-describedby="modal-modal-description"
                   >
                     <Box sx={style} className={styles.modalBox}>
+                      <h2>Edit your note here</h2>
                       <input
                         type="text"
                         className={styles.editInput}

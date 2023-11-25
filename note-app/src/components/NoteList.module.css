@@ -75,7 +75,7 @@
 }
 
 .modalBox{
-    width: 80%!important;
+    width: 50%!important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,3 +83,6 @@
     height: 50vh;
 }
 
+.modalBox > h2{
+    margin-top: -40px;
+}
