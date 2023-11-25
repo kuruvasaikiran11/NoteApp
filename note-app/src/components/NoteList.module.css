@@ -86,3 +86,14 @@
 .modalBox > h2{
     margin-top: -40px;
 }
+
+@media (max-width: 767px) {
+    .actionBtn {
+      flex-direction: column;
+    }
+  
+    .actionBtn > button {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }

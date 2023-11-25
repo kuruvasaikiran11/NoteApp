@@ -13,3 +13,14 @@
 .headingText > i{
     color: rgb(95, 143, 177);
 }
+
+@media (max-width: 767px) {
+    .header {
+      text-align: left; /* Adjust as needed */
+    }
+  
+    .headingText {
+      padding: 10px;
+      margin: 0;
+    }
+  }
